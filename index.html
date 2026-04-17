@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🍌 Banana Agency — Client Briefs</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FDD835;
+    --yellow-dark: #F9A825;
+    --black: #0a0a0a;
+    --charcoal: #141414;
+    --card: #1a1a1a;
+    --border: rgba(255,255,255,0.08);
+    --text: #ffffff;
+    --text-muted: rgba(255,255,255,0.5);
+    --text-dim: rgba(255,255,255,0.3);
+    --green: #00e676;
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--charcoal);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--yellow);
+  }
+
+  .logo span { color: var(--text); }
+
+  /* ── TABS ── */
+  .tabs-row {
+    display: flex;
+    gap: 0;
+    background: var(--charcoal);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    overflow-x: auto;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 16px 20px 13px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--yellow); border-bottom-color: var(--yellow); }
+
+  /* ── LANG SWITCHER ── */
+  .lang-switcher {
+    display: flex;
+    gap: 6px;
+  }
+
+  .lang-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 6px 10px;
+    transition: all 0.18s;
+  }
+
+  .lang-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+  .lang-btn.active { background: var(--yellow); color: var(--black); border-color: var(--yellow); }
+
+  /* ── MAIN LAYOUT ── */
+  .main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* ── FORM HEADER ── */
+  .form-hero {
+    background: var(--yellow);
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 36px 40px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .form-hero::before {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    width: 160px;
+    height: 160px;
+    background: rgba(0,0,0,0.07);
+    border-radius: 50%;
+  }
+
+  .form-hero::after {
+    content: '🍌';
+    position: absolute;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 64px;
+    opacity: 0.3;
+  }
+
+  .form-type-tag {
+    background: rgba(0,0,0,0.15);
+    border-radius: 4px;
+    color: rgba(0,0,0,0.6);
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    margin-bottom: 12px;
+    padding: 4px 10px;
+    text-transform: uppercase;
+  }
+
+  .form-title {
+    color: var(--black);
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+    max-width: 80%;
+  }
+
+  .form-subtitle {
+    color: rgba(0,0,0,0.6);
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 80%;
+  }
+
+  /* ── FORM BODY ── */
+  .form-body {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+  }
+
+  /* ── SECTION ── */
+  .section {
+    border-bottom: 1px solid var(--border);
+    padding: 32px 40px;
+  }
+
+  .section:last-child { border-bottom: none; }
+
+  .section-label {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .section-num {
+    background: var(--yellow);
+    border-radius: 6px;
+    color: var(--black);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 3px 8px;
+  }
+
+  .section-title {
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── QUESTION ── */
+  .question {
+    margin-bottom: 28px;
+  }
+
+  .question:last-child { margin-bottom: 0; }
+
+  .q-label {
+    color: var(--text);
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .q-required { color: var(--yellow); margin-left: 3px; }
+
+  .q-hint {
+    color: var(--text-dim);
+    font-size: 12px;
+    margin-bottom: 10px;
+    margin-top: -6px;
+  }
+
+  /* ── INPUTS ── */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  textarea,
+  select {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    outline: none;
+    padding: 12px 16px;
+    transition: border-color 0.18s;
+    width: 100%;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  textarea:focus,
+  select:focus {
+    border-color: var(--yellow);
+    background: rgba(253,216,53,0.04);
+  }
+
+  textarea { min-height: 100px; resize: vertical; }
+
+  select option { background: var(--charcoal); }
+
+  /* ── CHECKBOXES & RADIOS ── */
+  .options-grid {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .options-grid.cols-1 { grid-template-columns: 1fr; }
+  .options-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .opt-label {
+    align-items: center;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    padding: 10px 14px;
+    transition: all 0.15s;
+  }
+
+  .opt-label:hover {
+    background: rgba(253,216,53,0.06);
+    border-color: rgba(253,216,53,0.3);
+  }
+
+  .opt-label input[type="checkbox"],
+  .opt-label input[type="radio"] {
+    accent-color: var(--yellow);
+    flex-shrink: 0;
+    height: 16px;
+    width: 16px;
+  }
+
+  .opt-text {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  /* ── DIVIDER ── */
+  .q-divider {
+    border: none;
+    border-top: 1px dashed var(--border);
+    margin: 24px 0;
+  }
+
+  /* ── SUBMIT ── */
+  .submit-section {
+    background: var(--charcoal);
+    border-radius: 0 0 var(--radius) var(--radius);
+    padding: 32px 40px;
+    border: 1px solid var(--border);
+    border-top: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .submit-note {
+    color: var(--text-dim);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .submit-note a { color: var(--yellow); text-decoration: none; }
+
+  .btn-submit {
+    background: var(--yellow);
+    border: none;
+    border-radius: 8px;
+    color: var(--black);
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 14px 32px;
+    transition: all 0.18s;
+    white-space: nowrap;
+  }
+
+  .btn-submit:hover {
+    background: var(--yellow-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(253,216,53,0.25);
+  }
+
+  .btn-submit:active { transform: translateY(0); }
+
+  /* ── PANELS ── */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── NOTIFICATION ── */
+  .notif {
+    background: rgba(0,230,118,0.1);
+    border: 1px solid rgba(0,230,118,0.3);
+    border-radius: var(--radius);
+    color: var(--green);
+    display: none;
+    font-size: 14px;
+    margin-top: 24px;
+    padding: 20px 28px;
+    text-align: center;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .site-header { padding: 16px 20px; }
+    .tabs-row { padding: 0 20px; }
+    .main { padding: 32px 16px 60px; }
+    .form-hero { padding: 28px 24px 24px; }
+    .form-title { font-size: 22px; max-width: 100%; }
+    .form-subtitle { max-width: 100%; }
+    .form-hero::after { display: none; }
+    .section { padding: 24px 24px; }
+    .options-grid { grid-template-columns: 1fr; }
+    .options-grid.cols-3 { grid-template-columns: 1fr 1fr; }
+    .submit-section { padding: 24px; flex-direction: column; align-items: flex-start; }
+    .btn-submit { width: 100%; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="logo">BANANA<span>AGENCY</span></div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('ru')">RU</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('pl')">PL</button>
+    <button class="lang-btn" onclick="setLang('de')">DE</button>
+  </div>
+</header>
+
+<!-- BRIEF TABS -->
+<div class="tabs-row">
+  <button class="tab-btn active" onclick="setTab('content')" id="tab-content">
+    <span class="t" data-ru="🍌 ИИ-Контент" data-en="🍌 AI Content" data-pl="🍌 Treści AI" data-de="🍌 KI-Content"></span>
+  </button>
+  <button class="tab-btn" onclick="setTab('auto')" id="tab-auto">
+    <span class="t" data-ru="⚡ ИИ-Автоматизация" data-en="⚡ AI Automation" data-pl="⚡ Automatyzacja AI" data-de="⚡ KI-Automatisierung"></span>
+  </button>
+</div>
+
+<main class="main">
+
+  <!-- ════════════════════════════════════════
+       BRIEF 1 — AI CONTENT
+  ════════════════════════════════════════ -->
+  <div class="panel active" id="panel-content">
+
+    <!-- Hero -->
+    <div class="form-hero">
+      <div class="form-type-tag t" data-ru="БРИФ / КЛИЕНТ" data-en="BRIEF / CLIENT" data-pl="BRIEF / KLIENT" data-de="BRIEF / KUNDE"></div>
+      <h1 class="form-title t"
+        data-ru="Бриф на создание ИИ-контента"
+        data-en="AI Content Creation Brief"
+        data-pl="Brief na tworzenie treści AI"
+        data-de="Brief zur KI-Content-Erstellung">
+      </h1>
+      <p class="form-subtitle t"
+        data-ru="Расскажите нам о вашем бизнесе и целях — мы разработаем идеальную контент-стратегию на базе ИИ. Чем подробнее, тем лучше."
+        data-en="Tell us about your business and goals — we'll craft the perfect AI-powered content strategy. The more detail, the better."
+        data-pl="Opowiedz nam o swoim biznesie i celach — stworzymy idealną strategię treści opartą na AI. Im więcej szczegółów, tym lepiej."
+        data-de="Erzählen Sie uns von Ihrem Unternehmen und Ihren Zielen — wir entwickeln die perfekte KI-gestützte Content-Strategie. Je mehr Details, desto besser.">
+      </p>
+    </div>
+
+    <form id="form-content" onsubmit="handleSubmit(event,'notif-content')">
+    <div class="form-body">
+
+      <!-- 01 Компания -->
+      <div class="section">
+        <div class="section-label">
+          <span class="section-num">01</span>
+          <span class="section-title t" data-ru="О КОМПАНИИ" data-en="ABOUT YOUR COMPANY" data-pl="O FIRMIE" data-de="ÜBER IHR UNTERNEHMEN"></span>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Название компании / бренда <span class='q-required'>*</span>" data-en="Company / Brand name <span class='q-required'>*</span>" data-pl="Nazwa firmy / marki <span class='q-required'>*</span>" data-de="Firmen- / Markenname <span class='q-required'>*</span>"></label>
+          <input type="text" required>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Отрасль / ниша <span class='q-required'>*</span>" data-en="Industry / Niche <span class='q-required'>*</span>" data-pl="Branża / nisza <span class='q-required'>*</span>" data-de="Branche / Nische <span class='q-required'>*</span>"></label>
+          <input type="text" required>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Сайт и ссылки на соцсети" data-en="Website & social media links" data-pl="Strona www i linki do social media" data-de="Website & Social-Media-Links"></label>
+          <input type="url" placeholder="https://">
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Контактное лицо (имя, должность) <span class='q-required'>*</span>" data-en="Contact person (name, role) <span class='q-required'>*</span>" data-pl="Osoba kontaktowa (imię, stanowisko) <span class='q-required'>*</span>" data-de="Ansprechpartner (Name, Position) <span class='q-required'>*</span>"></label>
+          <input type="text" required>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Email <span class='q-required'>*</span>" data-en="Email <span class='q-required'>*</span>" data-pl="Adres e-mail <span class='q-required'>*</span>" data-de="E-Mail <span class='q-required'>*</span>"></label>
+          <input type="email" required>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Телефон / мессенджер" data-en="Phone / Messenger" data-pl="Telefon / Messenger" data-de="Telefon / Messenger"></label>
+          <input type="tel">
+        </div>
+      </div>
+
+      <!-- 02 О бизнесе -->
+      <div class="section">
+        <div class="section-label">
+          <span class="section-num">02</span>
+          <span class="section-title t" data-ru="ВАШ БИЗНЕС" data-en="YOUR BUSINESS" data-pl="TWÓJ BIZNES" data-de="IHR UNTERNEHMEN"></span>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Чем занимается ваша компания? Основной продукт / услуга <span class='q-required'>*</span>" data-en="What does your company do? Main product / service <span class='q-required'>*</span>" data-pl="Czym zajmuje się firma? Główny produkt / usługa <span class='q-required'>*</span>" data-de="Was macht Ihr Unternehmen? Hauptprodukt / -dienstleistung <span class='q-required'>*</span>"></label>
+          <textarea required></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Что выделяет вас среди конкурентов?" data-en="What sets you apart from competitors?" data-pl="Co wyróżnia Cię na tle konkurencji?" data-de="Was unterscheidet Sie von Mitbewerbern?"></label>
+          <textarea></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Стадия развития бизнеса <span class='q-required'>*</span>" data-en="Business stage <span class='q-required'>*</span>" data-pl="Etap rozwoju biznesu <span class='q-required'>*</span>" data-de="Unternehmensphase <span class='q-required'>*</span>"></label>
+          <div class="options-grid cols-1">
+            <label class="opt-label"><input type="radio" name="stage-c" value="startup"><span class="opt-text t" data-ru="Стартап — только запускаемся" data-en="Startup — just launching" data-pl="Startup — dopiero startujemy" data-de="Startup — gerade gestartet"></span></label>
+            <label class="opt-label"><input type="radio" name="stage-c" value="growth"><span class="opt-text t" data-ru="Рост — активно масштабируемся" data-en="Growth — actively scaling" data-pl="Wzrost — aktywnie się rozwijamy" data-de="Wachstum — aktiv skalierend"></span></label>
+            <label class="opt-label"><input type="radio" name="stage-c" value="established"><span class="opt-text t" data-ru="Устоявшийся бизнес" data-en="Established business" data-pl="Ugruntowana firma" data-de="Etabliertes Unternehmen"></span></label>
+            <label class="opt-label"><input type="radio" name="stage-c" value="scaling"><span class="opt-text t" data-ru="Масштабирование на новые рынки" data-en="Scaling into new markets" data-pl="Skalowanie na nowe rynki" data-de="Expansion in neue Märkte"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Ваши 3 главных бизнес-цели на следующие 6 месяцев <span class='q-required'>*</span>" data-en="Your top 3 business goals for the next 6 months <span class='q-required'>*</span>" data-pl="3 główne cele biznesowe na najbliższe 6 miesięcy <span class='q-required'>*</span>" data-de="Ihre 3 wichtigsten Unternehmensziele für die nächsten 6 Monate <span class='q-required'>*</span>"></label>
+          <textarea required></textarea>
+        </div>
+      </div>
+
+      <!-- 03 Целевая аудитория -->
+      <div class="section">
+        <div class="section-label">
+          <span class="section-num">03</span>
+          <span class="section-title t" data-ru="ЦЕЛЕВАЯ АУДИТОРИЯ" data-en="TARGET AUDIENCE" data-pl="GRUPA DOCELOWA" data-de="ZIELGRUPPE"></span>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Опишите вашего идеального клиента (возраст, пол, интересы, профессия) <span class='q-required'>*</span>" data-en="Describe your ideal customer (age, gender, interests, profession) <span class='q-required'>*</span>" data-pl="Opisz swojego idealnego klienta (wiek, płeć, zainteresowania, zawód) <span class='q-required'>*</span>" data-de="Beschreiben Sie Ihren idealen Kunden (Alter, Geschlecht, Interessen, Beruf) <span class='q-required'>*</span>"></label>
+          <textarea required></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Географический охват <span class='q-required'>*</span>" data-en="Geographic focus <span class='q-required'>*</span>" data-pl="Zasięg geograficzny <span class='q-required'>*</span>" data-de="Geografischer Fokus <span class='q-required'>*</span>"></label>
+          <div class="options-grid">
+            <label class="opt-label"><input type="radio" name="geo-c" value="city"><span class="opt-text t" data-ru="Один город" data-en="Single city" data-pl="Jedno miasto" data-de="Eine Stadt"></span></label>
+            <label class="opt-label"><input type="radio" name="geo-c" value="country"><span class="opt-text t" data-ru="Страна" data-en="Country" data-pl="Kraj" data-de="Land"></span></label>
+            <label class="opt-label"><input type="radio" name="geo-c" value="europe"><span class="opt-text t" data-ru="Европа" data-en="Europe" data-pl="Europa" data-de="Europa"></span></label>
+            <label class="opt-label"><input type="radio" name="geo-c" value="global"><span class="opt-text t" data-ru="Весь мир" data-en="Worldwide" data-pl="Cały świat" data-de="Weltweit"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Язык(и) вашей аудитории" data-en="Language(s) your audience speaks" data-pl="Języki Twojej grupy docelowej" data-de="Sprache(n) Ihrer Zielgruppe"></label>
+          <input type="text">
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Главные боли и проблемы аудитории" data-en="Main pain points of your audience" data-pl="Główne problemy / pain points odbiorców" data-de="Hauptprobleme Ihrer Zielgruppe"></label>
+          <textarea></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Что мотивирует их покупать / подписываться?" data-en="What motivates them to buy / subscribe?" data-pl="Co motywuje ich do zakupu / subskrypcji?" data-de="Was motiviert sie zum Kauf / zur Anmeldung?"></label>
+          <textarea></textarea>
+        </div>
+      </div>
+
+      <!-- 04 Контент-стратегия -->
+      <div class="section">
+        <div class="section-label">
+          <span class="section-num">04</span>
+          <span class="section-title t" data-ru="КОНТЕНТ-СТРАТЕГИЯ" data-en="CONTENT STRATEGY" data-pl="STRATEGIA TREŚCI" data-de="CONTENT-STRATEGIE"></span>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Для каких платформ нужен контент? <span class='q-required'>*</span>" data-en="Which platforms do you need content for? <span class='q-required'>*</span>" data-pl="Na jakich platformach potrzebujesz treści? <span class='q-required'>*</span>" data-de="Für welche Plattformen benötigen Sie Content? <span class='q-required'>*</span>"></label>
+          <div class="options-grid">
+            <label class="opt-label"><input type="checkbox"><span class="opt-text">Instagram</span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text">TikTok</span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text">LinkedIn</span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text">Facebook</span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text">YouTube</span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Блог / Сайт" data-en="Blog / Website" data-pl="Blog / Strona www" data-de="Blog / Website"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Email-рассылка" data-en="Email newsletter" data-pl="Newsletter e-mail" data-de="E-Mail-Newsletter"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Другое" data-en="Other" data-pl="Inne" data-de="Sonstiges"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Какой тип контента необходим? <span class='q-required'>*</span>" data-en="What type of content do you need? <span class='q-required'>*</span>" data-pl="Jakiego rodzaju treści potrzebujesz? <span class='q-required'>*</span>" data-de="Welche Art von Content benötigen Sie? <span class='q-required'>*</span>"></label>
+          <div class="options-grid">
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Посты / подписи" data-en="Posts / Captions" data-pl="Posty / opisy" data-de="Posts / Captions"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Reels / сценарии видео" data-en="Reels / video scripts" data-pl="Reelsy / scenariusze wideo" data-de="Reels / Video-Skripte"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text">Stories</span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Статьи / лонгриды" data-en="Long-form articles" data-pl="Artykuły / long-form" data-de="Langform-Artikel"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Email-копирайтинг" data-en="Email copy" data-pl="Copywriting e-mail" data-de="E-Mail-Texte"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Рекламные тексты" data-en="Ad copy" data-pl="Teksty reklamowe" data-de="Werbetexte"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Карусели / слайды" data-en="Carousels / slides" data-pl="Karuzele / slajdy" data-de="Karussells / Slides"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="ИИ-видеопродакшн" data-en="AI Video Production" data-pl="Produkcja wideo AI" data-de="KI-Videoproduktion"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Тон коммуникации бренда <span class='q-required'>*</span>" data-en="Brand tone of voice <span class='q-required'>*</span>" data-pl="Ton komunikacji marki <span class='q-required'>*</span>" data-de="Markenstimme <span class='q-required'>*</span>"></label>
+          <div class="options-grid">
+            <label class="opt-label"><input type="radio" name="tone-c"><span class="opt-text t" data-ru="Профессиональный / Экспертный" data-en="Professional / Expert" data-pl="Profesjonalny / Ekspercki" data-de="Professionell / Expertentonc"></span></label>
+            <label class="opt-label"><input type="radio" name="tone-c"><span class="opt-text t" data-ru="Дружелюбный / Непринуждённый" data-en="Friendly / Casual" data-pl="Przyjazny / Casualowy" data-de="Freundlich / Casual"></span></label>
+            <label class="opt-label"><input type="radio" name="tone-c"><span class="opt-text t" data-ru="Вдохновляющий / Мотивирующий" data-en="Inspirational / Motivational" data-pl="Inspirujący / Motywacyjny" data-de="Inspirierend / Motivierend"></span></label>
+            <label class="opt-label"><input type="radio" name="tone-c"><span class="opt-text t" data-ru="Юмористический / Остроумный" data-en="Humorous / Witty" data-pl="Humorystyczny / Dowcipny" data-de="Humorvoll / Witzig"></span></label>
+            <label class="opt-label"><input type="radio" name="tone-c"><span class="opt-text t" data-ru="Люкс / Премиум" data-en="Luxurious / Premium" data-pl="Luksusowy / Premium" data-de="Luxuriös / Premium"></span></label>
+            <label class="opt-label"><input type="radio" name="tone-c"><span class="opt-text t" data-ru="Дерзкий / Провокационный" data-en="Edgy / Bold" data-pl="Odważny / Wyrazisty" data-de="Mutig / Provokant"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Есть ли брендбук / гайдлайн стиля?" data-en="Do you have brand guidelines / style guide?" data-pl="Czy posiadasz brand book / wytyczne marki?" data-de="Haben Sie Markenrichtlinien / Style Guide?"></label>
+          <div class="options-grid cols-1">
+            <label class="opt-label"><input type="radio" name="brand-c"><span class="opt-text t" data-ru="Да, пришлю файл" data-en="Yes, I'll send the file" data-pl="Tak, prześlę plik" data-de="Ja, ich schicke die Datei"></span></label>
+            <label class="opt-label"><input type="radio" name="brand-c"><span class="opt-text t" data-ru="Нет, нужна помощь с разработкой" data-en="No, need help creating one" data-pl="Nie, potrzebuję pomocy" data-de="Nein, benötige Hilfe bei der Erstellung"></span></label>
+            <label class="opt-label"><input type="radio" name="brand-c"><span class="opt-text t" data-ru="В процессе разработки" data-en="In progress" data-pl="W trakcie tworzenia" data-de="In Bearbeitung"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Конкуренты или аккаунты, которые вас вдохновляют" data-en="Competitors or accounts you admire (links or names)" data-pl="Konkurenci lub konta, które podziwisz" data-de="Mitbewerber oder Accounts, die Sie inspirieren"></label>
+          <textarea></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Как часто нужен контент? <span class='q-required'>*</span>" data-en="How often do you need content? <span class='q-required'>*</span>" data-pl="Jak często potrzebujesz treści? <span class='q-required'>*</span>" data-de="Wie oft benötigen Sie Content? <span class='q-required'>*</span>"></label>
+          <div class="options-grid cols-1">
+            <label class="opt-label"><input type="radio" name="freq-c"><span class="opt-text t" data-ru="Ежедневно" data-en="Daily" data-pl="Codziennie" data-de="Täglich"></span></label>
+            <label class="opt-label"><input type="radio" name="freq-c"><span class="opt-text t" data-ru="3–5 раз в неделю" data-en="3–5 times per week" data-pl="3–5 razy w tygodniu" data-de="3–5 Mal pro Woche"></span></label>
+            <label class="opt-label"><input type="radio" name="freq-c"><span class="opt-text t" data-ru="1–2 раза в неделю" data-en="1–2 times per week" data-pl="1–2 razy w tygodniu" data-de="1–2 Mal pro Woche"></span></label>
+            <label class="opt-label"><input type="radio" name="freq-c"><span class="opt-text t" data-ru="Разово / под проект" data-en="One-time / per project" data-pl="Jednorazowo / pod projekt" data-de="Einmalig / projektbezogen"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Текущая ситуация с контентом (что публикуете сейчас, чего не хватает)" data-en="Current content situation (what you publish now, what's missing)" data-pl="Obecna sytuacja z treściami (co teraz publikujesz, czego brakuje)" data-de="Aktuelle Content-Situation (was Sie jetzt veröffentlichen, was fehlt)"></label>
+          <textarea></textarea>
+        </div>
+      </div>
+
+      <!-- 05 Цели и KPI -->
+      <div class="section">
+        <div class="section-label">
+          <span class="section-num">05</span>
+          <span class="section-title t" data-ru="ЦЕЛИ И KPI" data-en="GOALS & KPI" data-pl="CELE I KPI" data-de="ZIELE & KPI"></span>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Главная цель этого проекта <span class='q-required'>*</span>" data-en="Main goal of this project <span class='q-required'>*</span>" data-pl="Główny cel projektu <span class='q-required'>*</span>" data-de="Hauptziel dieses Projekts <span class='q-required'>*</span>"></label>
+          <div class="options-grid cols-1">
+            <label class="opt-label"><input type="radio" name="goal-c"><span class="opt-text t" data-ru="Рост охвата и узнаваемости бренда" data-en="Grow reach and brand awareness" data-pl="Wzrost zasięgu i rozpoznawalności marki" data-de="Reichweite und Markenbekanntheit steigern"></span></label>
+            <label class="opt-label"><input type="radio" name="goal-c"><span class="opt-text t" data-ru="Генерация лидов и продажи" data-en="Lead generation and sales" data-pl="Generowanie leadów i sprzedaż" data-de="Lead-Generierung und Verkauf"></span></label>
+            <label class="opt-label"><input type="radio" name="goal-c"><span class="opt-text t" data-ru="Вовлечённость и комьюнити" data-en="Engagement and community" data-pl="Zaangażowanie i społeczność" data-de="Engagement und Community"></span></label>
+            <label class="opt-label"><input type="radio" name="goal-c"><span class="opt-text t" data-ru="Позиционирование как эксперта в нише" data-en="Expert positioning in the niche" data-pl="Pozycjonowanie jako eksperta w niszy" data-de="Expertenpositionierung in der Nische"></span></label>
+            <label class="opt-label"><input type="radio" name="goal-c"><span class="opt-text t" data-ru="Запуск нового продукта / услуги" data-en="New product / service launch" data-pl="Launch nowego produktu / usługi" data-de="Neues Produkt / Dienstleistung launchen"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Как будете измерять успех? (метрики, KPI)" data-en="How will you measure success? (metrics, KPIs)" data-pl="Jak będziesz mierzyć sukces? (metryki, KPI)" data-de="Wie werden Sie Erfolg messen? (Metriken, KPIs)"></label>
+          <textarea></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Ожидаемый результат через 1–3 месяца" data-en="Expected result in 1–3 months" data-pl="Oczekiwany rezultat po 1–3 miesiącach" data-de="Erwartetes Ergebnis in 1–3 Monaten"></label>
+          <textarea></textarea>
+        </div>
+      </div>
+
+      <!-- 06 Бюджет -->
+      <div class="section">
+        <div class="section-label">
+          <span class="section-num">06</span>
+          <span class="section-title t" data-ru="БЮДЖЕТ И СРОКИ" data-en="BUDGET & TIMELINE" data-pl="BUDŻET I HARMONOGRAM" data-de="BUDGET & ZEITPLAN"></span>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Ориентировочный ежемесячный бюджет <span class='q-required'>*</span>" data-en="Approximate monthly budget <span class='q-required'>*</span>" data-pl="Przybliżony budżet miesięczny <span class='q-required'>*</span>" data-de="Ungefähres monatliches Budget <span class='q-required'>*</span>"></label>
+          <div class="options-grid cols-1">
+            <label class="opt-label"><input type="radio" name="budget-c"><span class="opt-text t" data-ru="До 500 €" data-en="Up to €500" data-pl="Do 500 €" data-de="Bis zu 500 €"></span></label>
+            <label class="opt-label"><input type="radio" name="budget-c"><span class="opt-text t" data-ru="500 € – 1 500 €" data-en="€500 – €1,500" data-pl="500 € – 1 500 €" data-de="500 € – 1.500 €"></span></label>
+            <label class="opt-label"><input type="radio" name="budget-c"><span class="opt-text t" data-ru="1 500 € – 3 000 €" data-en="€1,500 – €3,000" data-pl="1 500 € – 3 000 €" data-de="1.500 € – 3.000 €"></span></label>
+            <label class="opt-label"><input type="radio" name="budget-c"><span class="opt-text t" data-ru="Более 3 000 € / индивидуально" data-en="€3,000+ / custom" data-pl="Powyżej 3 000 € / indywidualnie" data-de="Über 3.000 € / individuell"></span></label>
+            <label class="opt-label"><input type="radio" name="budget-c"><span class="opt-text t" data-ru="Пока не знаю — нужна консультация" data-en="Not sure yet — need a consultation" data-pl="Jeszcze nie wiem — potrzebuję konsultacji" data-de="Noch unklar — benötige Beratung"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Желаемая дата старта" data-en="Desired project start date" data-pl="Preferowana data rozpoczęcia" data-de="Gewünschtes Startdatum"></label>
+          <input type="text">
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Формат сотрудничества" data-en="Collaboration format" data-pl="Format współpracy" data-de="Zusammenarbeitsformat"></label>
+          <div class="options-grid cols-1">
+            <label class="opt-label"><input type="radio" name="collab-c"><span class="opt-text t" data-ru="Разовый проект" data-en="One-time project" data-pl="Jednorazowy projekt" data-de="Einmalprojekt"></span></label>
+            <label class="opt-label"><input type="radio" name="collab-c"><span class="opt-text t" data-ru="Постоянное ежемесячное сотрудничество" data-en="Ongoing monthly collaboration" data-pl="Stała współpraca miesięczna" data-de="Laufende monatliche Zusammenarbeit"></span></label>
+            <label class="opt-label"><input type="radio" name="collab-c"><span class="opt-text t" data-ru="Ещё не определился" data-en="Not sure yet" data-pl="Jeszcze nie wiem" data-de="Noch nicht entschieden"></span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- 07 Опыт -->
+      <div class="section">
+        <div class="section-label">
+          <span class="section-num">07</span>
+          <span class="section-title t" data-ru="ПРЕДЫДУЩИЙ ОПЫТ" data-en="PREVIOUS EXPERIENCE" data-pl="POPRZEDNIE DOŚWIADCZENIA" data-de="BISHERIGE ERFAHRUNGEN"></span>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Работали ли вы ранее с контент-агентством?" data-en="Have you worked with a content agency before?" data-pl="Czy współpracowałeś/aś wcześniej z agencją contentową?" data-de="Haben Sie bereits mit einer Content-Agentur gearbeitet?"></label>
+          <div class="options-grid">
+            <label class="opt-label"><input type="radio" name="prev-c" value="yes"><span class="opt-text t" data-ru="Да" data-en="Yes" data-pl="Tak" data-de="Ja"></span></label>
+            <label class="opt-label"><input type="radio" name="prev-c" value="no"><span class="opt-text t" data-ru="Нет" data-en="No" data-pl="Nie" data-de="Nein"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Если да — что работало хорошо? Что не сработало?" data-en="If yes — what worked well? What didn't?" data-pl="Jeśli tak — co działało dobrze? Co nie działało?" data-de="Falls ja — was hat gut funktioniert? Was nicht?"></label>
+          <textarea></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Использовали ли вы ИИ-инструменты в своём бизнесе?" data-en="Have you used AI tools in your business before?" data-pl="Czy korzystałeś/aś z narzędzi AI w swoim biznesie?" data-de="Haben Sie bisher KI-Tools in Ihrem Unternehmen eingesetzt?"></label>
+          <div class="options-grid">
+            <label class="opt-label"><input type="radio" name="ai-exp-c" value="yes"><span class="opt-text t" data-ru="Да, активно" data-en="Yes, actively" data-pl="Tak, aktywnie" data-de="Ja, aktiv"></span></label>
+            <label class="opt-label"><input type="radio" name="ai-exp-c" value="little"><span class="opt-text t" data-ru="Немного экспериментировали" data-en="A little experimenting" data-pl="Trochę eksperymentowałem/am" data-de="Ein wenig experimentiert"></span></label>
+            <label class="opt-label"><input type="radio" name="ai-exp-c" value="no"><span class="opt-text t" data-ru="Нет, это первый раз" data-en="No, this is the first time" data-pl="Nie, to po raz pierwszy" data-de="Nein, das ist das erste Mal"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Любая важная информация или вопросы к нам" data-en="Anything else important or questions for us" data-pl="Coś ważnego lub pytania do nas" data-de="Sonstiges oder Fragen an uns"></label>
+          <textarea></textarea>
+        </div>
+      </div>
+
+    </div><!-- /form-body -->
+
+    <!-- Submit -->
+    <div class="submit-section">
+      <div class="submit-note t"
+        data-ru="Мы свяжемся с вами в течение <strong>24 часов</strong>.<br><a href='mailto:info@bananaagency.net'>info@bananaagency.net</a> · www.bananaagency.net"
+        data-en="We'll get back to you within <strong>24 hours</strong>.<br><a href='mailto:info@bananaagency.net'>info@bananaagency.net</a> · www.bananaagency.net"
+        data-pl="Skontaktujemy się w ciągu <strong>24 godzin</strong>.<br><a href='mailto:info@bananaagency.net'>info@bananaagency.net</a> · www.bananaagency.net"
+        data-de="Wir melden uns innerhalb von <strong>24 Stunden</strong>.<br><a href='mailto:info@bananaagency.net'>info@bananaagency.net</a> · www.bananaagency.net">
+      </div>
+      <button type="submit" class="btn-submit t"
+        data-ru="Отправить бриф 🍌"
+        data-en="Submit Brief 🍌"
+        data-pl="Wyślij brief 🍌"
+        data-de="Brief senden 🍌">
+      </button>
+    </div>
+    </form>
+
+    <div class="notif" id="notif-content" style="display:none">
+      <span class="t"
+        data-ru="✅ Бриф отправлен! Мы свяжемся с вами в течение 24 часов. 🍌"
+        data-en="✅ Brief submitted! We'll be in touch within 24 hours. 🍌"
+        data-pl="✅ Brief wysłany! Skontaktujemy się w ciągu 24 godzin. 🍌"
+        data-de="✅ Brief gesendet! Wir melden uns innerhalb von 24 Stunden. 🍌">
+      </span>
+    </div>
+
+  </div><!-- /panel-content -->
+
+
+  <!-- ════════════════════════════════════════
+       BRIEF 2 — AI AUTOMATION
+  ════════════════════════════════════════ -->
+  <div class="panel" id="panel-auto">
+
+    <!-- Hero -->
+    <div class="form-hero" style="background: linear-gradient(135deg, #FDD835 60%, #F9A825 100%);">
+      <div class="form-type-tag t" data-ru="БРИФ / КЛИЕНТ" data-en="BRIEF / CLIENT" data-pl="BRIEF / KLIENT" data-de="BRIEF / KUNDE"></div>
+      <h1 class="form-title t"
+        data-ru="Бриф на ИИ-автоматизацию бизнеса"
+        data-en="AI Business Automation Brief"
+        data-pl="Brief na automatyzację biznesu z AI"
+        data-de="KI-Geschäftsautomatisierungs-Brief">
+      </h1>
+      <p class="form-subtitle t"
+        data-ru="Опишите ваши процессы и боли — мы спроектируем ИИ-систему, которая сэкономит часы ручной работы и масштабирует ваш бизнес без раздутия штата."
+        data-en="Describe your processes and pain points — we'll design an AI system that saves hours of manual work and scales your business without growing headcount."
+        data-pl="Opisz swoje procesy i problemy — zaprojektujemy system AI, który zaoszczędzi godziny pracy i skaluje Twój biznes bez zwiększania zespołu."
+        data-de="Beschreiben Sie Ihre Prozesse und Schmerzpunkte — wir entwerfen ein KI-System, das Arbeitsstunden spart und Ihr Unternehmen skaliert, ohne den Personalbestand zu erhöhen.">
+      </p>
+    </div>
+
+    <form id="form-auto" onsubmit="handleSubmit(event,'notif-auto')">
+    <div class="form-body">
+
+      <!-- 01 Компания -->
+      <div class="section">
+        <div class="section-label">
+          <span class="section-num">01</span>
+          <span class="section-title t" data-ru="О КОМПАНИИ" data-en="ABOUT YOUR COMPANY" data-pl="O FIRMIE" data-de="ÜBER IHR UNTERNEHMEN"></span>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Название компании / бренда <span class='q-required'>*</span>" data-en="Company / Brand name <span class='q-required'>*</span>" data-pl="Nazwa firmy / marki <span class='q-required'>*</span>" data-de="Firmen- / Markenname <span class='q-required'>*</span>"></label>
+          <input type="text" required>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Отрасль / ниша <span class='q-required'>*</span>" data-en="Industry / Niche <span class='q-required'>*</span>" data-pl="Branża / nisza <span class='q-required'>*</span>" data-de="Branche / Nische <span class='q-required'>*</span>"></label>
+          <input type="text" required>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Сайт и ссылки" data-en="Website & links" data-pl="Strona www i linki" data-de="Website & Links"></label>
+          <input type="url" placeholder="https://">
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Контактное лицо (имя, должность) <span class='q-required'>*</span>" data-en="Contact person (name, role) <span class='q-required'>*</span>" data-pl="Osoba kontaktowa (imię, stanowisko) <span class='q-required'>*</span>" data-de="Ansprechpartner (Name, Position) <span class='q-required'>*</span>"></label>
+          <input type="text" required>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Email <span class='q-required'>*</span>" data-en="Email <span class='q-required'>*</span>" data-pl="E-mail <span class='q-required'>*</span>" data-de="E-Mail <span class='q-required'>*</span>"></label>
+          <input type="email" required>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Телефон / мессенджер" data-en="Phone / Messenger" data-pl="Telefon / Messenger" data-de="Telefon / Messenger"></label>
+          <input type="tel">
+        </div>
+      </div>
+
+      <!-- 02 Бизнес-контекст -->
+      <div class="section">
+        <div class="section-label">
+          <span class="section-num">02</span>
+          <span class="section-title t" data-ru="БИЗНЕС-КОНТЕКСТ" data-en="BUSINESS CONTEXT" data-pl="KONTEKST BIZNESOWY" data-de="UNTERNEHMENSKONTEXT"></span>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Чем занимается компания? Основной продукт / услуга <span class='q-required'>*</span>" data-en="What does your company do? Main product / service <span class='q-required'>*</span>" data-pl="Czym zajmuje się firma? Główny produkt / usługa <span class='q-required'>*</span>" data-de="Was macht Ihr Unternehmen? Hauptprodukt / -dienstleistung <span class='q-required'>*</span>"></label>
+          <textarea required></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Стадия бизнеса <span class='q-required'>*</span>" data-en="Business stage <span class='q-required'>*</span>" data-pl="Etap biznesu <span class='q-required'>*</span>" data-de="Unternehmensphase <span class='q-required'>*</span>"></label>
+          <div class="options-grid cols-1">
+            <label class="opt-label"><input type="radio" name="stage-a"><span class="opt-text t" data-ru="Стартап (до 10 сотрудников)" data-en="Startup (up to 10 employees)" data-pl="Startup (do 10 pracowników)" data-de="Startup (bis zu 10 Mitarbeiter)"></span></label>
+            <label class="opt-label"><input type="radio" name="stage-a"><span class="opt-text t" data-ru="SMB (10–50 сотрудников)" data-en="SMB (10–50 employees)" data-pl="SMB (10–50 pracowników)" data-de="KMU (10–50 Mitarbeiter)"></span></label>
+            <label class="opt-label"><input type="radio" name="stage-a"><span class="opt-text t" data-ru="Средний бизнес (50–200 сотрудников)" data-en="Mid-market (50–200 employees)" data-pl="Średnia firma (50–200 pracowników)" data-de="Mittelstand (50–200 Mitarbeiter)"></span></label>
+            <label class="opt-label"><input type="radio" name="stage-a"><span class="opt-text t" data-ru="Крупный бизнес / Enterprise (200+)" data-en="Enterprise (200+)" data-pl="Duża firma / Enterprise (200+)" data-de="Großunternehmen / Enterprise (200+)"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Кто ваши клиенты — B2B или B2C?" data-en="Are your customers B2B or B2C?" data-pl="Kim są Twoi klienci — B2B czy B2C?" data-de="Sind Ihre Kunden B2B oder B2C?"></label>
+          <div class="options-grid">
+            <label class="opt-label"><input type="radio" name="biz-model"><span class="opt-text">B2B</span></label>
+            <label class="opt-label"><input type="radio" name="biz-model"><span class="opt-text">B2C</span></label>
+            <label class="opt-label"><input type="radio" name="biz-model"><span class="opt-text">B2B & B2C</span></label>
+            <label class="opt-label"><input type="radio" name="biz-model"><span class="opt-text">B2G</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 Текущие процессы -->
+      <div class="section">
+        <div class="section-label">
+          <span class="section-num">03</span>
+          <span class="section-title t" data-ru="ТЕКУЩИЕ ПРОЦЕССЫ" data-en="CURRENT PROCESSES" data-pl="OBECNE PROCESY" data-de="AKTUELLE PROZESSE"></span>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Какие процессы хотите автоматизировать? <span class='q-required'>*</span>" data-en="Which processes would you like to automate? <span class='q-required'>*</span>" data-pl="Jakie procesy chciałbyś/chciałabyś zautomatyzować? <span class='q-required'>*</span>" data-de="Welche Prozesse möchten Sie automatisieren? <span class='q-required'>*</span>"></label>
+          <div class="options-grid cols-1">
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Поддержка клиентов / ИИ-чат-бот" data-en="Customer support / AI chatbot" data-pl="Obsługa klienta / chatbot AI" data-de="Kundensupport / KI-Chatbot"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Генерация и квалификация лидов" data-en="Lead generation & qualification" data-pl="Generowanie i kwalifikacja leadów" data-de="Lead-Generierung & -Qualifizierung"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Автоматизация Email / CRM" data-en="Email / CRM automation" data-pl="Automatyzacja e-mail / CRM" data-de="E-Mail / CRM-Automatisierung"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="ИИ-конвейер генерации контента" data-en="AI content generation pipeline" data-pl="Pipeline do generowania treści z AI" data-de="KI-Content-Generierungs-Pipeline"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Сбор и анализ данных / отчётность" data-en="Data collection & analysis / reporting" data-pl="Zbieranie i analiza danych / raportowanie" data-de="Datenerfassung & -analyse / Berichterstattung"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Внутренние рабочие процессы и задачи" data-en="Internal workflows & task management" data-pl="Wewnętrzne przepływy pracy i zarządzanie zadaniami" data-de="Interne Workflows & Aufgabenverwaltung"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Планирование публикаций в соцсетях" data-en="Social media scheduling" data-pl="Planowanie publikacji w social media" data-de="Social-Media-Planung"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Автоматизация воронки продаж" data-en="Sales funnel automation" data-pl="Automatyzacja lejka sprzedażowego" data-de="Sales-Funnel-Automatisierung"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Обработка документов и договоров" data-en="Document & contract processing" data-pl="Przetwarzanie dokumentów i umów" data-de="Dokumenten- & Vertragsverarbeitung"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="HR / онбординг сотрудников" data-en="HR / employee onboarding" data-pl="HR / onboarding pracowników" data-de="HR / Mitarbeiter-Onboarding"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="ИИ-агент для внутренней базы знаний" data-en="AI agent for internal knowledge base" data-pl="Agent AI dla wewnętrznej bazy wiedzy" data-de="KI-Agent für interne Wissensdatenbank"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Другое" data-en="Other" data-pl="Inne" data-de="Sonstiges"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Опишите конкретный процесс, который вы хотите автоматизировать (шаг за шагом, как это работает сейчас) <span class='q-required'>*</span>" data-en="Describe the specific process you want to automate (step-by-step, how it works now) <span class='q-required'>*</span>" data-pl="Opisz konkretny proces do automatyzacji (krok po kroku, jak działa teraz) <span class='q-required'>*</span>" data-de="Beschreiben Sie den spezifischen Prozess, den Sie automatisieren möchten (Schritt für Schritt, wie er jetzt funktioniert) <span class='q-required'>*</span>"></label>
+          <textarea style="min-height:140px;" required></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Сколько времени сейчас уходит на эти процессы вручную? (часов в неделю / месяц)" data-en="How much time do these processes currently take manually? (hours per week / month)" data-pl="Ile czasu zajmują te procesy ręcznie? (godzin tygodniowo / miesięcznie)" data-de="Wie viel Zeit nehmen diese Prozesse derzeit manuell in Anspruch? (Stunden pro Woche / Monat)"></label>
+          <input type="text">
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Сколько сотрудников сейчас занимаются этими задачами?" data-en="How many employees currently handle these tasks?" data-pl="Ile osób zajmuje się tymi zadaniami?" data-de="Wie viele Mitarbeiter kümmern sich derzeit um diese Aufgaben?"></label>
+          <input type="text">
+        </div>
+      </div>
+
+      <!-- 04 Инструменты -->
+      <div class="section">
+        <div class="section-label">
+          <span class="section-num">04</span>
+          <span class="section-title t" data-ru="ТЕКУЩИЙ СТЕК ИНСТРУМЕНТОВ" data-en="CURRENT TOOL STACK" data-pl="OBECNY STOS NARZĘDZI" data-de="AKTUELLER TOOL-STACK"></span>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Какое ПО / инструменты вы используете сейчас? <span class='q-required'>*</span>" data-en="What software / tools do you currently use? <span class='q-required'>*</span>" data-pl="Jakich narzędzi / oprogramowania używasz? <span class='q-required'>*</span>" data-de="Welche Software / Tools verwenden Sie derzeit? <span class='q-required'>*</span>"></label>
+          <div class="options-grid">
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="CRM (Bitrix24, HubSpot, Salesforce...)" data-en="CRM (Bitrix24, HubSpot, Salesforce...)" data-pl="CRM (Bitrix24, HubSpot, Salesforce...)" data-de="CRM (Bitrix24, HubSpot, Salesforce...)"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Email-маркетинг (Mailchimp, SendGrid...)" data-en="Email marketing (Mailchimp, SendGrid...)" data-pl="E-mail marketing (Mailchimp, SendGrid...)" data-de="E-Mail-Marketing (Mailchimp, SendGrid...)"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Мессенджеры (Telegram, WhatsApp, Slack)" data-en="Messengers (Telegram, WhatsApp, Slack)" data-pl="Komunikatory (Telegram, WhatsApp, Slack)" data-de="Messenger (Telegram, WhatsApp, Slack)"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Управление проектами (Notion, Jira, Asana)" data-en="Project management (Notion, Jira, Asana)" data-pl="Zarządzanie projektami (Notion, Jira, Asana)" data-de="Projektmanagement (Notion, Jira, Asana)"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Google Workspace / Microsoft 365" data-en="Google Workspace / Microsoft 365" data-pl="Google Workspace / Microsoft 365" data-de="Google Workspace / Microsoft 365"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Аналитика (Google Analytics, Power BI)" data-en="Analytics (Google Analytics, Power BI)" data-pl="Analityka (Google Analytics, Power BI)" data-de="Analytik (Google Analytics, Power BI)"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="E-commerce (Shopify, WooCommerce)" data-en="E-commerce (Shopify, WooCommerce)" data-pl="E-commerce (Shopify, WooCommerce)" data-de="E-Commerce (Shopify, WooCommerce)"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Собственная / самописная система" data-en="Custom / proprietary system" data-pl="Własny / dedykowany system" data-de="Eigenes / proprietäres System"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Укажите конкретные названия используемых инструментов" data-en="List the specific tools you use by name" data-pl="Podaj konkretne nazwy używanych narzędzi" data-de="Nennen Sie die genauen Namen der verwendeten Tools"></label>
+          <textarea></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Есть ли у вас технический / IT-отдел?" data-en="Do you have a technical / IT team?" data-pl="Czy posiadasz zespół techniczny / IT?" data-de="Haben Sie ein technisches / IT-Team?"></label>
+          <div class="options-grid cols-1">
+            <label class="opt-label"><input type="radio" name="it-team"><span class="opt-text t" data-ru="Да, есть штатный IT-отдел" data-en="Yes, in-house IT team" data-pl="Tak, mamy dział IT" data-de="Ja, internes IT-Team"></span></label>
+            <label class="opt-label"><input type="radio" name="it-team"><span class="opt-text t" data-ru="Есть частичная техническая компетенция" data-en="Some technical competence" data-pl="Częściowa kompetencja techniczna" data-de="Begrenzte technische Kompetenz"></span></label>
+            <label class="opt-label"><input type="radio" name="it-team"><span class="opt-text t" data-ru="IT на аутсорсе" data-en="Outsourced IT" data-pl="IT na outsourcingu" data-de="IT ausgelagert"></span></label>
+            <label class="opt-label"><input type="radio" name="it-team"><span class="opt-text t" data-ru="Нет технической команды" data-en="No technical team" data-pl="Brak zespołu technicznego" data-de="Kein technisches Team"></span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 Проблемы и цели -->
+      <div class="section">
+        <div class="section-label">
+          <span class="section-num">05</span>
+          <span class="section-title t" data-ru="ПРОБЛЕМЫ И ЦЕЛИ" data-en="PAIN POINTS & GOALS" data-pl="PROBLEMY I CELE" data-de="SCHMERZPUNKTE & ZIELE"></span>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Какую главную проблему вы хотите решить с помощью ИИ? <span class='q-required'>*</span>" data-en="What main problem do you want to solve with AI? <span class='q-required'>*</span>" data-pl="Jaki główny problem chcesz rozwiązać za pomocą AI? <span class='q-required'>*</span>" data-de="Welches Hauptproblem möchten Sie mit KI lösen? <span class='q-required'>*</span>"></label>
+          <textarea required></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Что вы ожидаете от автоматизации? <span class='q-required'>*</span>" data-en="What results do you expect from automation? <span class='q-required'>*</span>" data-pl="Jakiego rezultatu oczekujesz od automatyzacji? <span class='q-required'>*</span>" data-de="Welche Ergebnisse erwarten Sie von der Automatisierung? <span class='q-required'>*</span>"></label>
+          <div class="options-grid cols-1">
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Сэкономить X часов ручной работы в неделю" data-en="Save X hours of manual work per week" data-pl="Zaoszczędzić X godzin pracy tygodniowo" data-de="X Stunden manuelle Arbeit pro Woche sparen"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Увеличить поток лидов без роста команды" data-en="Increase lead flow without growing the team" data-pl="Zwiększyć flow leadów bez rozbudowy zespołu" data-de="Leadflow steigern ohne Teamwachstum"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Ускорить обработку клиентских запросов" data-en="Speed up customer request processing" data-pl="Przyspieszyć obsługę zapytań klientów" data-de="Kundenanfragen schneller bearbeiten"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Снизить количество ошибок в рутинных процессах" data-en="Reduce errors in routine processes" data-pl="Zmniejszyć liczbę błędów w rutynowych procesach" data-de="Fehler in Routineprozessen reduzieren"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Улучшить customer experience / NPS" data-en="Improve customer experience / NPS" data-pl="Poprawić customer experience / NPS" data-de="Customer Experience / NPS verbessern"></span></label>
+            <label class="opt-label"><input type="checkbox"><span class="opt-text t" data-ru="Масштабировать бизнес без найма новых сотрудников" data-en="Scale business without hiring" data-pl="Skalować biznes bez zatrudniania" data-de="Unternehmen ohne Neueinstellungen skalieren"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Конкретный KPI: что будет означать успех через 3 месяца?" data-en="Specific KPI: what will success look like in 3 months?" data-pl="Konkretne KPI: co będzie oznaczać sukces po 3 miesiącach?" data-de="Spezifischer KPI: Wie sieht Erfolg in 3 Monaten aus?"></label>
+          <textarea></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Что сделало бы проект провальным для вас?" data-en="What would make this project a failure for you?" data-pl="Co sprawiłoby, że projekt byłby dla Ciebie porażką?" data-de="Was würde dieses Projekt für Sie zum Misserfolg machen?"></label>
+          <textarea></textarea>
+        </div>
+      </div>
+
+      <!-- 06 Опыт с ИИ -->
+      <div class="section">
+        <div class="section-label">
+          <span class="section-num">06</span>
+          <span class="section-title t" data-ru="ОПЫТ С ИИ-ИНСТРУМЕНТАМИ" data-en="EXPERIENCE WITH AI TOOLS" data-pl="DOŚWIADCZENIE Z NARZĘDZIAMI AI" data-de="ERFAHRUNG MIT KI-TOOLS"></span>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Пробовали ли вы ИИ-автоматизацию ранее?" data-en="Have you tried AI automation before?" data-pl="Czy próbowałeś/aś automatyzacji AI wcześniej?" data-de="Haben Sie KI-Automatisierung bereits ausprobiert?"></label>
+          <div class="options-grid cols-1">
+            <label class="opt-label"><input type="radio" name="ai-prev"><span class="opt-text t" data-ru="Да, внедряли — поделюсь опытом" data-en="Yes, we implemented it — I'll share the experience" data-pl="Tak, wdrażaliśmy — podzielę się doświadczeniem" data-de="Ja, haben wir implementiert — ich teile die Erfahrung"></span></label>
+            <label class="opt-label"><input type="radio" name="ai-prev"><span class="opt-text t" data-ru="Тестировали, но не внедрили" data-en="Tested but didn't implement" data-pl="Testowaliśmy, ale nie wdrożyliśmy" data-de="Getestet, aber nicht implementiert"></span></label>
+            <label class="opt-label"><input type="radio" name="ai-prev"><span class="opt-text t" data-ru="Нет, это первый раз" data-en="No, this is the first time" data-pl="Nie, to po raz pierwszy" data-de="Nein, das erste Mal"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Если пробовали — какие ИИ-инструменты использовали? Что сработало, а что нет?" data-en="If you tried — which AI tools did you use? What worked and what didn't?" data-pl="Jeśli próbowałeś/aś — jakich narzędzi AI używałeś/aś? Co działało, a co nie?" data-de="Falls ja — welche KI-Tools haben Sie verwendet? Was hat funktioniert, was nicht?"></label>
+          <textarea></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Насколько ваша команда готова к внедрению ИИ?" data-en="How ready is your team for AI adoption?" data-pl="Na ile Twój zespół jest gotowy na wdrożenie AI?" data-de="Wie bereit ist Ihr Team für KI-Einführung?"></label>
+          <div class="options-grid cols-1">
+            <label class="opt-label"><input type="radio" name="readiness"><span class="opt-text t" data-ru="Энтузиасты — все хотят ИИ" data-en="Enthusiasts — everyone wants AI" data-pl="Entuzjaści — wszyscy chcą AI" data-de="Enthusiasten — alle wollen KI"></span></label>
+            <label class="opt-label"><input type="radio" name="readiness"><span class="opt-text t" data-ru="Нейтральные — готовы, если докажем результат" data-en="Neutral — ready if we prove results" data-pl="Neutralni — gotowi, jeśli udowodnimy wyniki" data-de="Neutral — bereit, wenn wir Ergebnisse beweisen"></span></label>
+            <label class="opt-label"><input type="radio" name="readiness"><span class="opt-text t" data-ru="Скептики — нужно обучение и убеждение" data-en="Skeptics — need training and persuasion" data-pl="Sceptycy — potrzebne szkolenie i przekonanie" data-de="Skeptiker — Training und Überzeugung nötig"></span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- 07 Бюджет -->
+      <div class="section">
+        <div class="section-label">
+          <span class="section-num">07</span>
+          <span class="section-title t" data-ru="БЮДЖЕТ И СРОКИ" data-en="BUDGET & TIMELINE" data-pl="BUDŻET I HARMONOGRAM" data-de="BUDGET & ZEITPLAN"></span>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Бюджет на проект / ежемесячный бюджет <span class='q-required'>*</span>" data-en="Project budget / monthly budget <span class='q-required'>*</span>" data-pl="Budżet projektu / budżet miesięczny <span class='q-required'>*</span>" data-de="Projektbudget / monatliches Budget <span class='q-required'>*</span>"></label>
+          <div class="options-grid cols-1">
+            <label class="opt-label"><input type="radio" name="budget-a"><span class="opt-text t" data-ru="До 1 000 €" data-en="Up to €1,000" data-pl="Do 1 000 €" data-de="Bis zu 1.000 €"></span></label>
+            <label class="opt-label"><input type="radio" name="budget-a"><span class="opt-text t" data-ru="1 000 € – 3 000 €" data-en="€1,000 – €3,000" data-pl="1 000 € – 3 000 €" data-de="1.000 € – 3.000 €"></span></label>
+            <label class="opt-label"><input type="radio" name="budget-a"><span class="opt-text t" data-ru="3 000 € – 7 000 €" data-en="€3,000 – €7,000" data-pl="3 000 € – 7 000 €" data-de="3.000 € – 7.000 €"></span></label>
+            <label class="opt-label"><input type="radio" name="budget-a"><span class="opt-text t" data-ru="Более 7 000 € / Enterprise-проект" data-en="€7,000+ / Enterprise project" data-pl="Powyżej 7 000 € / projekt Enterprise" data-de="Über 7.000 € / Enterprise-Projekt"></span></label>
+            <label class="opt-label"><input type="radio" name="budget-a"><span class="opt-text t" data-ru="Пока не знаю — нужна консультация" data-en="Not sure yet — need a consultation" data-pl="Jeszcze nie wiem — potrzebuję konsultacji" data-de="Noch unklar — benötige Beratung"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Желаемая дата старта" data-en="Desired start date" data-pl="Preferowana data startu" data-de="Gewünschtes Startdatum"></label>
+          <input type="text">
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Есть ли дедлайн или важные даты?" data-en="Are there any deadlines or important dates?" data-pl="Czy są jakieś terminy lub ważne daty?" data-de="Gibt es Deadlines oder wichtige Termine?"></label>
+          <input type="text">
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Формат сотрудничества" data-en="Collaboration format" data-pl="Format współpracy" data-de="Zusammenarbeitsformat"></label>
+          <div class="options-grid cols-1">
+            <label class="opt-label"><input type="radio" name="collab-a"><span class="opt-text t" data-ru="Разовое внедрение (ключ под ключ)" data-en="One-time implementation (turnkey)" data-pl="Jednorazowe wdrożenie (pod klucz)" data-de="Einmalige Implementierung (schlüsselfertig)"></span></label>
+            <label class="opt-label"><input type="radio" name="collab-a"><span class="opt-text t" data-ru="Постоянное обслуживание и развитие" data-en="Ongoing maintenance & development" data-pl="Stała obsługa i rozwój" data-de="Laufende Wartung & Entwicklung"></span></label>
+            <label class="opt-label"><input type="radio" name="collab-a"><span class="opt-text t" data-ru="Внедрение + обучение команды" data-en="Implementation + team training" data-pl="Wdrożenie + szkolenie zespołu" data-de="Implementierung + Team-Schulung"></span></label>
+            <label class="opt-label"><input type="radio" name="collab-a"><span class="opt-text t" data-ru="Ещё не определился" data-en="Not sure yet" data-pl="Jeszcze nie wiem" data-de="Noch nicht entschieden"></span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- 08 Доп. информация -->
+      <div class="section">
+        <div class="section-label">
+          <span class="section-num">08</span>
+          <span class="section-title t" data-ru="ДОПОЛНИТЕЛЬНО" data-en="ADDITIONAL INFO" data-pl="DODATKOWE INFORMACJE" data-de="ZUSÄTZLICHE INFORMATIONEN"></span>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Есть ли у вас требования по безопасности данных или GDPR / RODO?" data-en="Do you have data security or GDPR requirements?" data-pl="Czy masz wymagania dotyczące bezpieczeństwa danych lub RODO?" data-de="Haben Sie Datensicherheits- oder DSGVO-Anforderungen?"></label>
+          <div class="options-grid">
+            <label class="opt-label"><input type="radio" name="gdpr"><span class="opt-text t" data-ru="Да, строгие требования" data-en="Yes, strict requirements" data-pl="Tak, rygorystyczne wymagania" data-de="Ja, strenge Anforderungen"></span></label>
+            <label class="opt-label"><input type="radio" name="gdpr"><span class="opt-text t" data-ru="Стандартные требования" data-en="Standard requirements" data-pl="Standardowe wymagania" data-de="Standardanforderungen"></span></label>
+            <label class="opt-label"><input type="radio" name="gdpr"><span class="opt-text t" data-ru="Не знаю, нужна консультация" data-en="Not sure, need consultation" data-pl="Nie wiem, potrzebuję konsultacji" data-de="Unklar, brauche Beratung"></span></label>
+          </div>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Любая важная информация о компании или проекте" data-en="Any important information about your company or project" data-pl="Inne ważne informacje o firmie lub projekcie" data-de="Sonstige wichtige Informationen über Ihr Unternehmen oder Projekt"></label>
+          <textarea></textarea>
+        </div>
+
+        <div class="question">
+          <label class="q-label t" data-ru="Ваши вопросы к нам" data-en="Your questions for us" data-pl="Twoje pytania do nas" data-de="Ihre Fragen an uns"></label>
+          <textarea></textarea>
+        </div>
+      </div>
+
+    </div><!-- /form-body -->
+
+    <!-- Submit -->
+    <div class="submit-section">
+      <div class="submit-note t"
+        data-ru="Мы свяжемся с вами в течение <strong>24 часов</strong>.<br><a href='mailto:info@bananaagency.net'>info@bananaagency.net</a> · www.bananaagency.net"
+        data-en="We'll get back to you within <strong>24 hours</strong>.<br><a href='mailto:info@bananaagency.net'>info@bananaagency.net</a> · www.bananaagency.net"
+        data-pl="Skontaktujemy się w ciągu <strong>24 godzin</strong>.<br><a href='mailto:info@bananaagency.net'>info@bananaagency.net</a> · www.bananaagency.net"
+        data-de="Wir melden uns innerhalb von <strong>24 Stunden</strong>.<br><a href='mailto:info@bananaagency.net'>info@bananaagency.net</a> · www.bananaagency.net">
+      </div>
+      <button type="submit" class="btn-submit t"
+        data-ru="Отправить бриф 🍌"
+        data-en="Submit Brief 🍌"
+        data-pl="Wyślij brief 🍌"
+        data-de="Brief senden 🍌">
+      </button>
+    </div>
+    </form>
+
+    <div class="notif" id="notif-auto" style="display:none">
+      <span class="t"
+        data-ru="✅ Бриф отправлен! Мы свяжемся с вами в течение 24 часов. 🍌"
+        data-en="✅ Brief submitted! We'll be in touch within 24 hours. 🍌"
+        data-pl="✅ Brief wysłany! Skontaktujemy się w ciągu 24 godzin. 🍌"
+        data-de="✅ Brief gesendet! Wir melden uns innerhalb von 24 Stunden. 🍌">
+      </span>
+    </div>
+
+  </div><!-- /panel-auto -->
+
+</main>
+
+<script>
+  let currentLang = 'ru';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+    renderTranslations();
+  }
+
+  function renderTranslations() {
+    document.querySelectorAll('.t[data-' + currentLang + ']').forEach(el => {
+      el.innerHTML = el.getAttribute('data-' + currentLang);
+    });
+  }
+
+  function setTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    document.getElementById('panel-' + tab).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function handleSubmit(e, notifId) {
+    e.preventDefault();
+    const notif = document.getElementById(notifId);
+    notif.style.display = 'block';
+    notif.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    e.target.reset();
+    setTimeout(() => { notif.style.display = 'none'; }, 6000);
+  }
+
+  // Init
+  renderTranslations();
+</script>
+</body>
+</html>
