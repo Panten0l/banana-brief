@@ -365,6 +365,13 @@
 
   .btn-submit:active { transform: translateY(0); }
 
+  .btn-submit:disabled {
+    cursor: wait;
+    opacity: 0.65;
+    transform: none;
+    box-shadow: none;
+  }
+
   /* ── PANELS ── */
   .panel { display: none; }
   .panel.active { display: block; }
@@ -380,6 +387,12 @@
     margin-top: 24px;
     padding: 20px 28px;
     text-align: center;
+  }
+
+  .notif.error {
+    background: rgba(255,82,82,0.1);
+    border-color: rgba(255,82,82,0.35);
+    color: #ff8a8a;
   }
 
   /* ── RESPONSIVE ── */
@@ -1103,6 +1116,35 @@
 
 <script>
   let currentLang = 'ru';
+  const FORM_ENDPOINT = 'https://formsubmit.co/ajax/info@bananaagency.net';
+  const FORM_TYPES = {
+    'form-content': {
+      ru: 'Бриф на создание ИИ-контента',
+      en: 'AI Content Creation Brief',
+      pl: 'Brief na tworzenie tresci AI',
+      de: 'Brief zur KI-Content-Erstellung'
+    },
+    'form-auto': {
+      ru: 'Бриф на ИИ-автоматизацию бизнеса',
+      en: 'AI Business Automation Brief',
+      pl: 'Brief na automatyzacje AI',
+      de: 'Brief zur KI-Business-Automatisierung'
+    }
+  };
+  const STATUS_TEXT = {
+    sending: {
+      ru: 'Отправляем бриф...',
+      en: 'Sending brief...',
+      pl: 'Wysylamy brief...',
+      de: 'Brief wird gesendet...'
+    },
+    error: {
+      ru: 'Не получилось отправить бриф. Проверьте интернет и попробуйте еще раз или напишите нам на info@bananaagency.net.',
+      en: 'Could not send the brief. Please check your connection and try again or email us at info@bananaagency.net.',
+      pl: 'Nie udalo sie wyslac briefu. Sprawdz internet i sprobuj ponownie albo napisz na info@bananaagency.net.',
+      de: 'Der Brief konnte nicht gesendet werden. Bitte Verbindung pruefen und erneut versuchen oder an info@bananaagency.net schreiben.'
+    }
+  };
 
   function setLang(lang) {
     currentLang = lang;
@@ -1125,13 +1167,138 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function handleSubmit(e, notifId) {
-    e.preventDefault();
+  function cleanText(value) {
+    return (value || '')
+      .replace(/\s*\*\s*/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function getElementText(el) {
+    return cleanText(el ? (el.innerText || el.textContent) : '');
+  }
+
+  function getQuestionLabel(question, fallback) {
+    const label = question.querySelector('.q-label');
+    return getElementText(label) || fallback || 'Field';
+  }
+
+  function getOptionText(input) {
+    const option = input.closest('.opt-label');
+    const optionText = option ? option.querySelector('.opt-text') : null;
+    return getElementText(optionText || option) || input.value || 'Selected';
+  }
+
+  function setPayloadValue(payload, key, value) {
+    const normalizedKey = cleanText(key);
+    const normalizedValue = Array.isArray(value)
+      ? value.map(cleanText).filter(Boolean).join(', ')
+      : cleanText(value);
+
+    if (!normalizedKey || !normalizedValue) return;
+
+    if (payload[normalizedKey]) {
+      payload[normalizedKey] = `${payload[normalizedKey]}; ${normalizedValue}`;
+    } else {
+      payload[normalizedKey] = normalizedValue;
+    }
+  }
+
+  function collectFormPayload(form) {
+    const formType = FORM_TYPES[form.id]?.[currentLang] || FORM_TYPES[form.id]?.ru || form.id;
+    const payload = {
+      _subject: `New ${formType} - Banana Agency`,
+      _template: 'table',
+      _captcha: 'false',
+      form_type: formType,
+      language: currentLang,
+      submitted_at: new Date().toISOString()
+    };
+
+    form.querySelectorAll('.question').forEach((question, index) => {
+      const label = getQuestionLabel(question, `Question ${index + 1}`);
+
+      question.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not([type="hidden"]), textarea, select').forEach((field) => {
+        const value = field.value;
+        setPayloadValue(payload, label, value);
+
+        if (field.type === 'email' && value) {
+          payload.email = cleanText(value);
+          payload._replyto = cleanText(value);
+        }
+
+        if (!payload.name && index === 0 && value) {
+          payload.name = cleanText(value);
+        }
+      });
+
+      const checkedRadio = question.querySelector('input[type="radio"]:checked');
+      if (checkedRadio) {
+        setPayloadValue(payload, label, getOptionText(checkedRadio));
+      }
+
+      const checkedBoxes = [...question.querySelectorAll('input[type="checkbox"]:checked')];
+      if (checkedBoxes.length) {
+        setPayloadValue(payload, label, checkedBoxes.map(getOptionText));
+      }
+    });
+
+    return payload;
+  }
+
+  function setNotification(notifId, type, text) {
     const notif = document.getElementById(notifId);
+    const message = notif.querySelector('.t');
+
+    notif.classList.toggle('error', type === 'error');
+
+    if (text) {
+      message.textContent = text;
+    } else {
+      message.innerHTML = message.getAttribute('data-' + currentLang);
+    }
+
     notif.style.display = 'block';
     notif.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    e.target.reset();
-    setTimeout(() => { notif.style.display = 'none'; }, 6000);
+  }
+
+  async function handleSubmit(e, notifId) {
+    e.preventDefault();
+    const form = e.target;
+    const button = form.querySelector('.btn-submit');
+    const originalButtonHtml = button.innerHTML;
+
+    button.disabled = true;
+    button.textContent = STATUS_TEXT.sending[currentLang] || STATUS_TEXT.sending.ru;
+
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(collectFormPayload(form))
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok || result.success === false) {
+        throw new Error(result.message || 'Form submission failed');
+      }
+
+      setNotification(notifId, 'success');
+      form.reset();
+      setTimeout(() => {
+        document.getElementById(notifId).style.display = 'none';
+      }, 6000);
+    } catch (error) {
+      console.error('Brief submission failed:', error);
+      setNotification(notifId, 'error', STATUS_TEXT.error[currentLang] || STATUS_TEXT.error.ru);
+    } finally {
+      button.disabled = false;
+      button.innerHTML = originalButtonHtml;
+    }
   }
 
   // Init
